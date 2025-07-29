@@ -5,9 +5,9 @@
 ## 📑 Sumário
 
 1. [Objetivo](#-objetivo)
-2. [Preparação: Instalando o Linux](#-parte-0--preparação-instalando-o-linux)
-3. [Terminal e Comandos Básicos](#-parte-1--terminal-e-comandos-básicos)
-4. [Vim Sem Medo](#-parte-2--vim-sem-medo)
+2. [Preparação: Instalando o Linux](#-preparação-instalando-o-linux)
+3. [Terminal e Comandos Básicos](#-terminal-e-comandos-básicos)
+4. [Vim Sem Medo](#-vim-sem-medo)
 5. [Exercícios Propostos](#-exercicio-propostos)
 6. [O que Explorar Além](#-o-que-explorar-além)
 7. [Recursos Recomendados](#-recursos-recomendado)
