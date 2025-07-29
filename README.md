@@ -10,7 +10,7 @@
 4. [Vim Sem Medo](#-vim-sem-medo)
 5. [Exercícios Propostos](#-exercicio-propostos)
 6. [O que Explorar Além](#-o-que-explorar-além)
-7. [Recursos Recomendados](#-recursos-recomendado)
+7. [Materiais Para Consulta](#-materiais-para-consulta)
 
 
 ## 📌 Introdução
@@ -107,7 +107,7 @@ Use o **Linux Mint** via WSL2 ou VM. Ele é leve, estável, usado nos LCCs e ide
 
 ---
 
-## ⚙️ Parte 1 – Terminal e Comandos Básicos
+## ⚙️ Terminal e Comandos Básicos
 
 ### 🐚 O que é Shell?
 O **Shell** é o software que faz a comunicação entre o usuário e o sistema operacional (SO), permitindo o acesso aos recursos do SO por meio de comandos no terminal.
@@ -170,7 +170,7 @@ man nome_do_comando
 
 ---
 
-## ✍️ Parte 2 – Vim Sem Medo
+## ✍️ Vim Sem Medo
 
 **Vim** é um editor de texto em linha de comando, rápido, leve e altamente personalizável. É usado amplamente por desenvolvedores que querem produtividade e controle total pelo teclado.
 
