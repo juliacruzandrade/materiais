@@ -6,9 +6,9 @@
 
 1. [Objetivo](#-objetivo)
 2. [Preparação: Instalando o Linux](#-preparação-instalando-o-linux)
-3. [Terminal e Comandos Básicos](#-terminal-e-comandos-básicos)
-4. [Vim Sem Medo](#-vim-sem-medo)
-5. [Exercícios Propostos](#-exercicio-propostos)
+3. [Terminal e Comandos Básicos](terminal-e-comandos-básicos)
+4. [Vim Sem Medo](vim-sem-medo)
+5. [Exercícios Propostos](#-exercícios-propostos)
 6. [O que Explorar Além](#-o-que-explorar-além)
 7. [Materiais Para Consulta](#-materiais-para-consulta)
 
@@ -271,7 +271,7 @@ Explore aos poucos, revise os tópicos, e tente adaptar os exemplos ao seu próp
 
 ---
 
-## 📚 Materiais para consulta
+## 📚 Materiais Para Consulta
 
 🔗 [Acesse os slides no Google Apresentações](https://docs.google.com/presentation/d/1Y3FBVqCnUjD428_60088UYpdKhM0iJJcip0w8h0O8l0/edit)
 🔗 [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)
