@@ -33,7 +33,7 @@ a produtividade não apenas do ambiente linux, mas também do VIM - editor de te
 
 🔗 [Acesse o minicurso de Vim](https://github.com/isaacvicente/minicurso_vim)
 🔗 [Acesse os slides no Google Apresentações](https://docs.google.com/presentation/d/1Y3FBVqCnUjD428_60088UYpdKhM0iJJcip0w8h0O8l0/edit)
-🔗 [Acesse configuraçoes para o tmux/vim] (https://github.com/rafaelserey/tmux-vim-p1)
+🔗 [Acesse configuraçoes para o tmux/vim](https://github.com/rafaelserey/tmux-vim-p1)
 
 
 
