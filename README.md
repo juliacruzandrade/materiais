@@ -7,7 +7,6 @@
 Este repositório reúne materiais para estudantes de Computação que desejam melhorar sua produtividade utilizando o terminal Linux, com foco em:
 
 - Manipulação de arquivos e diretórios
-- Uso do Git e GitHub via linha de comando
 - Edição de texto com o editor VIM
 
 
