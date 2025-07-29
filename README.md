@@ -6,8 +6,8 @@
 
 1. [Objetivo](#-objetivo)
 2. [Preparação: Instalando o Linux](#-preparação-instalando-o-linux)
-3. [Terminal e Comandos Básicos](terminal-e-comandos-básicos)
-4. [Vim Sem Medo](vim-sem-medo)
+3. [Terminal e Comandos Básicos](#%EF%B8%8F-terminal-e-comandos-básicos)
+4. [Vim Sem Medo](#-vim-sem-medo)
 5. [Exercícios Propostos](#-exercícios-propostos)
 6. [O que Explorar Além](#-o-que-explorar-além)
 7. [Materiais Para Consulta](#-materiais-para-consulta)
