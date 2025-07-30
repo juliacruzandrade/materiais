@@ -14,7 +14,7 @@ embaixo dos panos.
 
 2) Não é possível criar ArrayLists de tipos primitivos (int, double, char, etc).
 O ArrayList só aceita tipos de referência, isto é, objetos. Se quiser guardar números, por exemplo, 
-é preciso usar a wrapper class correspondentes, como Integer para inteiros e Character para char.
+é preciso usar a wrapper class correspondente, como Integer para inteiros e Character para char.
 
 ### Construindo ArrayList
 
