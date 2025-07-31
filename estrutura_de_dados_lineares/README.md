@@ -260,7 +260,144 @@ Método 2: O(n), pois no pior caso (o elemento não está na lista )há uma iter
 Método 3: O(n), pois usa o método dois e tem o mesmo pior caso.
 
 
-##Pilha (LIFO)
+## Pilha (LIFO)
+
+Pilhas são uma abstração de um array definida por uma política de acesso restrita:
+
+* LIFO - Last In First Out, o último elemento a entrar na pilha é o primeiro a sair
+
+**IMPORTANTE**
+
+Nas operações com pilha, não podemos iterar diretamente sobre o array, pois essa estrutura é uma 
+abstração, então, apesar de ser, de fato, um array, não a tratamos como tal.
+
+Por isso, tem algumas operações específicas
+
+* addLast ou push: adiciona um elemento no topo (final) da pilha
+* removeLast ou pop: remove o elemento do topo (final) da pilha
+* peek: retorna o elemento do topo da pilha
+
+***Exemplos de aplicações de pilha***
+ 
+1) Ctrl + z
+2) Validação de parênteses 
+3) Execução de algoritmos recursivos
+
+***Atributos de uma Pilha***
+
+* Um array do tipo que se deseja armazenar (vou usar String)
+* Uma variável topo 
+
+```bash
+private String[] pilha;
+private int topo;
+
+```
+
+---
+
+***Construtor***
+
+* Recebe a capacidade da pilha
+
+```bash
+public Pilha(int capacidade){
+    this.pilha = new String[capacidade];
+    this.topo = -1; //Quando a pilha está vazia, o topo é -1
+}
+
+```
+
+---
+
+***Verificar se está cheia/vazia***
+
+```bash
+public boolean isEmpty(){
+    return this.topo == -1;
+}
+
+public boolean isFull(){
+    return this.topo = this.pilha.length - 1;
+}
+
+```
+
+---
+
+***Push***
+
+* Operação de adicionar um elemento ao topo da pilha
+* Se a pilha estiver lotada, seguir uma especificação sobre o que fazer
+
+```bash
+public void push(String str){
+    if(isFull()) throw new RuntimeException();
+    this.pilha[++this.topo] = str;
+}
+
+```
+
+---
+
+***Pop***
+
+* Remove o elemento do topo da pilha
+* Decrementa o topo
+* Retorna o elemento removido
+* Se a pilha estiver vazia, seguir uma especificação sobre o que fazer
+
+```bash
+public String pop(){
+    if(isEmpty()) throw new NoSuchElementException();
+    return this.pilha[this.topo--];
+}
+
+```
+
+---
+
+***Peek***
+
+* Retona o elemento do topo da pilha
+* Se a pilha estiver vazia, seguir uma especificação sobre o que fazer
+
+```bash
+public String peek(){
+    if(isEmpty) throw new NoSuchElementException();
+    return this.pilha[this.topo];
+}
+
+```
+
+***E os outros métodos, como não iterar?***
+
+Como não podemos itarar sobre os índices do array por trás da pilha, temos apenas as ferramentas
+push, pop e peek para fazer funções como contains. Por isso, frequentemente é preciso criar uma pilha 
+auxiliar, transferir os elementos para ela de acordo com o propósito do método. Então, retornar os 
+elementos para a pilha inicial.
+
+OBS: Se apenas parte dos elementos forem passados para a pilha auxiliar e depois colocados de volta na
+pilha original, não ocorre nenhum problema. Porém, na estrutura fila(FIFO), isso causa uma confusão, então é 
+preciso transferir todos os elementos para a fila auxiliar e depois trazê-los todos de volta à original.
+
+
+***Eficiência das operações***
+
+Push: O(1)
+Pop : O(1)
+Peek: O(1)
+Métodos que envolvem estruturas auxiliares e não apenas a manipulação do topo requerem uma análise específica.
+O contains, por exemplo, tem complexidade O(n) no pior caso.
+
+
+
+
+
+
+
+
+
 
 
 
