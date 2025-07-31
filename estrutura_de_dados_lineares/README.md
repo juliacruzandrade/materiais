@@ -1,5 +1,7 @@
 ## ArrayList
 
+(Minha revisão de EDA/LEDA)
+
 ### Motivações para construção
 
 - Criar uma estrutura que cresça 'dinamicamente'
@@ -53,15 +55,52 @@ public ArrayList(int capacity){
 
 ***Métodos de adição***
 
+Para os métodos de adição, precisaremos de alguns métodos auxiliares. Eles serão privados, pois sua utilidade é interna (na classe).
+
+Ao adicionar um elemento na lista, é preciso conferir se o array já chegou a sua ocupação máxima. É preciso *assegurar*
+que há espaço para mais um elemento. Se não houver, é preciso "aumentar" o espaço - criar um novo array com capacidade
+maior (resize) e transferir os elementos para ele.
+
+Além disso, para inserir um objeto em uma posição da lista que não seja a última, é preciso fazer um shift para a direita
+
+```bash
+private void ensureCapacity(intendedCapacity){
+    if(this.list.length < intendedCapacity){
+        resize(Math.max(this.list.length * 2, intendedCapacity));
+    }
+}
+
+private void resize(newCapacity){
+    String newList = new String[newCapacity];
+    for(int i = 0; i < this.list.length; i++){
+        newList[i] = this.list[i];
+    }
+    this.list = newList;
+}
+
+public void shiftToRight(int index){
+    for(int i = this.size - 1; i > index; i--){
+        this.list[i] = this.list[i - 1];
+    }
+}
+```
+
+
+Com esses métodos, é possível partir para os métodos de adição:
+
 1) boolean add(String str)
 
 * Adiciona o objeto passado como parâmetro no final da lista
 * É preciso conferir se o array já está totalmente preenchido (se sim, resize)
 
 ```bash
+public boolean add(String str){
+    ensureCapacity(this.size + 1);
+    list[this.size++] = str;
+    return true;
+}
+
 ```
-
-
 
 2)void add(int index, String str)
 
@@ -71,8 +110,15 @@ public ArrayList(int capacity){
 * Provavelmente será necessário fazer um shift para a direita
 
 ```bash
-```
+public void add(int index, String str){
+    if(index < 0 || index >= this.size) throw new IndexOutOfBoundsException();
+    ensureCapacity(this.size + 1);
+    shiftToRight(index);
+    this.list[index] = str;
+    this.size++;
+}
 
+```
 
 3)void set(int index, String str)
 
@@ -80,7 +126,12 @@ public ArrayList(int capacity){
 * É preciso conferir se o índice passado é válido
 
 ```bash
+public void set(int index, String str){
+    if(index < 0 || index >= this.size) throw new IndexOutOfBoundsException();
+    this.list[index] = str;
+}
 ```
+***Custo dos métodos de adição***
 
 
 
