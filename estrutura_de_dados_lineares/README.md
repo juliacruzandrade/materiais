@@ -133,6 +133,134 @@ public void set(int index, String str){
 ```
 ***Custo dos métodos de adição***
 
+Método 1: custo O(1) armotizado - o custo para adicionar n elementos na lista é O(n).
+Método 2: é preciso fazer shift para a direita, que no pior caso (índice 0) tem custo O(n).
+Método 3: O(1).
+
+
+---
+
+
+***Métodos de remoção***
+
+É possível remover um elemento passando como parâmetro de uma função o índice ou o próprio objeto. 
+Porém, para removê-lo, é preciso um shiftToLeft(), para não deixar 'buracos' na lista (posições não
+utilizadas no array).
+
+```bash
+public void shiftToLeft(int index){
+    for(int i = index; i < this.size - 1; i++){
+        this.list[i] = this.list[i + 1];
+    }
+}
+
+```
+
+Com esse método em mãos, temos os métodos de remoção:
+
+1)String remove(int index)
+
+* Remove o elemento do índice passado como parâmetro
+* É preciso verificar se o índice passado é válido
+* É preciso fazer shift para a esquerda
+* Retorna o elemento removido
+
+```bash
+public String remove(int index){
+    if(index < 0 || index > this.size - 1) throw new IndexOutOfBoundsException() //ou retorna null, depende da especificação;
+    String retorno = this.list[index];
+    shiftToLeft(index);
+    this.size--;
+    return retorno;
+}
+
+```
+
+2) boolean remove(String str)
+
+* Remove o elemento passado como parâmetro
+* Se o elemento não estiver na lista (não é possível remover) retorna falso
+* Se a remoção ocorrer com sucesso, retorna true
+
+```bash
+public boolean remove(String str){
+    if(str != null){
+        for(int i = 0; i < this.size; i++){
+            if(str.equals(this.list[i])){
+                shiftToLeft(i);
+                this.size--;
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}
+
+```
+
+***Custo dos métodos de remoção***
+
+Método 1: no pior caso - remover o primeiro elemento, será preciso fazer shiftToLeft(0), o que tem custo O(n).
+Método 2: no pior caso, o elemento não será encontrado depois da iteração por toda a lista, o que tem custo O(n).
+
+
+---
+
+
+***Métodos de busca***
+
+Existem algumas funções de busca para: acessar o elemento de um determinado índice, achar o índice de um elemento
+e conferir se um elemento está na lista. Esses métodos são:
+
+1)String get(int index)
+
+* Retorna o elemento do índice passado como parâmetro
+* É preciso conferir se o índice passado é válido
+
+```bash
+public String get(int index){
+    if(index < 0 || index > this.size - 1) throw new IndexOutOfBoundsException();
+    return this.list[index];
+}
+
+```
+
+2)int indexOf(String str)
+
+* Retorna o índice do elemento passado como parâmetro ou -1, se o elemento não estiver na lista
+* Se houver mais de uma ocorrência do elemento, retorna o índice da primeira
+
+```bash
+public int indexOf(String str){
+    if(str != null){
+        for(int i = 0; i < this.size; i++) if(str.equals(this.list[i])) return i;        
+    } 
+    return -1;
+}
+
+```
+
+3)boolean contains(String str)
+
+* Retorna true se o elemento estiver na lista e falso, caso não
+* Há uma iteração sobre a lista, mesmo que através da chamada de outro método
+
+```bash
+public boolean contains(String str){
+    return indexOf(str) != -1;
+}
+
+```
+
+***Custo dos métodos de busca***
+
+Método 1: O(1), acesso direto a uma posição do array
+Método 2: O(n), pois no pior caso (o elemento não está na lista )há uma iteração sobre toda a lista
+Método 3: O(n), pois usa o método dois e tem o mesmo pior caso.
+
+
+##Pilha (LIFO)
 
 
 
