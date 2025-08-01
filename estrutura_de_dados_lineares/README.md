@@ -260,9 +260,9 @@ Método 2: O(n), pois no pior caso (o elemento não está na lista )há uma iter
 Método 3: O(n), pois usa o método dois e tem o mesmo pior caso.
 
 
-## Pilha (LIFO)
+## Pilha (LIFO) 
 
-Pilhas são uma abstração de um array definida por uma política de acesso restrita:
+Pilhas são uma abstração de um array (nesse caso) definida por uma política de acesso restrita:
 
 * LIFO - Last In First Out, o último elemento a entrar na pilha é o primeiro a sair
 
@@ -391,7 +391,141 @@ Métodos que envolvem estruturas auxiliares e não apenas a manipulação do top
 O contains, por exemplo, tem complexidade O(n) no pior caso.
 
 
+## Fila (FIFO)
 
+Filas são uma abstração de um array (nesse caso) definida por uma política de acesso restrita:
+
+* FIFO - First In First Out, o primeiro elemento a entrar na fila é o primeiro a sair
+
+**IMPORTANTE**
+
+Nas operações com fila, também não podemos iterar diretamente sobre o array, pois essa estrutura é uma abstração
+
+As adições **sempre** são feitas no final da fila
+As remoções **sempre** são feitas no início da fila
+Uma fila circular é mais eficiente (não há necessidade de fazer shift)
+Nessa abordagem, se a fila estiver cheia e for preciso adicinar um elemento, removo o primeiro para adicioná-lo
+
+***Exemplos de aplicações de fila***
+
+1. Sistemas de atendimento por ordem de chegada
+2. Memória cache 
+3. Inverter uma pilha
+
+***Atributos de uma fila***
+
+* Um array do tipo que se deseja armazenar (vou usar String)
+* Um inteiro 'head' que marca a posição do início da fila
+* Um inteiro 'tail' que marca a posição do final da fila
+* Um inteiro 'size' que representa o tamanho da fila
+
+```bash
+private String[] fila;
+private int head;
+private int tail;
+private int size;
+```
+
+---
+
+***Construtor***
+
+* Recebe a capacidade da fila 
+
+```bash
+public Fila(int capacidade){
+    this.fila = new String[capacidade];
+    //Quando a fila está vazia, head e tail são -1
+    this.head = -1;
+    this.tail = -1;
+    this.size = 0;
+}
+```
+
+---
+
+***Verificar se está cheia/vazia***
+
+```bash
+public boolean isEmpty(){
+    return this.size == 0;
+}
+
+public boolean isFull(){
+    return this.size == this.fila.length;
+}
+
+```
+
+---
+
+***addLast***
+
+* Caso 1: a fila está vazia
+* Caso 2: a fila não está vazia nem cheia
+* Caso 3: a fila está cheia 
+
+OBS: No caso 3, não basta apenas sobrescrever o primeiro elemento. Se isso for feito, o elemento que
+acabou de ser adicionado (elemento 1) fica na posição head, então está na posição de mais antigo da fila. Se formos mais 
+uma vez adicionar um objeto na lista, um elemento 2, ele vai sobrescrever o elemento 1, em vez de entrar no lugar do
+que é, de fato, o mais antigo da fila.
+
+```bash
+public void addLast(String str){
+    if(isEmpty()){
+        this.head = 0;
+        this.tail = 0;
+        this.fila[this.tail] = str;
+        this.size++;
+    }
+
+    else if(isFull()){
+        this.head = (this.head + 1) % this.fila.length;
+        this.tail = (this.tail + 1) % this.fila.length;
+        this.fila[this.tail] = str;
+    }
+
+    else{
+        this.tail = (this.tail + 1) % this.fila.length;
+        this.fila[tail] = str;
+        this.size++;
+    }
+}
+
+```
+
+---
+
+***removeFirst***
+
+* A fila pode estar vazia
+* A fila pode ter só um elemento. Nesse caso, é preciso mudar o valor de head e tail
+
+```bash
+public String removeFirst(){
+    if(isEmpty()) throw new NoSuchElementException();
+
+    //O retorno da função é o elemento removido
+    String elemento = this.fila[this.head];
+    
+    if(this.size == 1){
+        this.head = -1;
+        this.tail = -1;
+    }else{
+        this.head = (this.head + 1) % this.fila.length;
+    }
+
+    this.size--;
+    return elemento;
+
+}
+
+```
+
+***Eficiência das operações***
+
+addLast: O(1)
+removeFirst: O(1)
 
 
 
