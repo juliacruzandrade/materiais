@@ -528,6 +528,103 @@ addLast: O(1)
 removeFirst: O(1)
 
 
+## Cache 
+
+Tópico: abordar a aplicação de estruturas de dados na implementação do cache
+
+### Hit rate e Miss rate
+
+Quando se procura um elemento na memória cache, duas coisas podem acontecer
+
+1) O elemento é encontrado (hit)
+2) O elemento não é encontrado (miss) 
+
+hit rate é uma métrica que avalia a quantidade operações 'hit' em relação ao total de vezes que o cache é acessado;
+miss rate é uma métrica que avalia a quantidade de operações 'miss' em relação ao total de vezes que o cache é acessado
+
+Quanto maior é a hit rate, melhor é a política de cache eviction
+Quando maior a miss rate, pior a política de cache eviction
+
+Mas o que é cache eviction?
+
+### Memória cache é limitada
+
+Cache é uma memória de rápido acesso, então, consequentemente, é uma memória cara, e é inviável que tenha uma grande capacidade.
+Assim, é preciso procurar uma política que determina qual elemento é removido quando um novo precisar entrar e não houver mais
+espaço na memória. Essa política é chamada de cache eviction, e existem várias dela, cada uma mais adequada a um contexto.
+
+### Política 1: FIFO
+
+Nessa política, ao tentar inserir um elemento, se a memória cache estiver cheia:
+
+O novo elemento entra no lugar do mais antigo
+
+* realizar um removeFirst() - tira o elemento mais antigo (o primeiro que entrou) da fila
+* realizar um addLast() do novo elemento
+
+Assim, a adição e remoção na memória cache, usando uma fila circular, custam O(1).
+(na verdade o miss ainda custa uma ida ao banco de dados)
+
+***Limitação***
+
+A busca por um elemento custa O(n).
+
+Para otimizar essa operação, é possível usar uma estrutura auxiliar que permita buscar por um 
+elemento com custo O(1). Exemplos de estrutura são o HashMap e o HashSet.
+
+Apesar do fato de que com essa mudança o uso de memória seria maior, pois todos os elementos da fila precisarão estar também
+na estrutura auxiliar, ainda vale a pena, pois todas as operações - adicionar, buscar e remover do cache - passam a ser O(1);
+(adiciona-se o custo de adicionar/remover da tabela ou do conjunto também, ao fazer essas operações na fila. Mas adição e 
+remoção nessas duas estruturas auxiliares custam O(1), então o custo continua constante).
+ 
+
+### Política 2: LRU
+
+**LRU - Least Recently Used**
+
+Nessa política, remove-se o elemento que acessado por último há mais tempo. 
+
+Digamos que busquei por "a", "b" e "c" (nessa ordem) no cache e, ao não encontrá-los, houve um acesso ao banco de dados e eles foram adicionados.
+
+Nessa implementação usando fila, sempre que um elemento é acessado, ele é movido para o fim da fila.
+
+Se tenho os elementos:
+
+["a", "b", "c"]
+
+e acesso b, ele vai para o final da fila (moveToTail). Veja:
+
+["a", "c", "b"]
+
+Ao acessar "a", ele vai para o final da fila:
+
+["c", "b", "a"]
+
+Se, agora, for preciso inserir um novo elemento, o "c" será removido, pois foi o que acessei menos recentemente (por isso está no começo da fila).
+
+
+### Política 3: LFU
+
+
+## LinkedList
+
+### Motivações para construção
+
+* Evitar o mal uso de memória. Em outras estruturas baseadas em array, algumas posições ficam vazias e o espaço na memória acaba sendo desperdiçado.
+  Esse mal uso pode parecer inofensivo, mas quando se trata de grandes entradas, o custo é caro e isso se torna um problema relevante.
+* Sempre que for preciso aumentar a capacidade em outras estruturas como ArrayList, Pilha e Fila, além de criar outra estrutura maior, é preciso transferir 
+  todos os elementos para ela, o que é uma operação custosa.
+
+### Ideia da Lista Ligada
+
+Cada elemento da lista é um objeto que possui referências para seu anterior (prev) e para seu posterior (next).
+
+Há uma referência para o início da lista (head) e uma para o final (tail). A partir desses objetos, conseguimos
+acessar toda a lista, indo para os objetos anteriores ou posterirores.
+
+Além disso, é importante ter uma variável para guardar o tamanho da lista (size).
+
+
 
 
 
