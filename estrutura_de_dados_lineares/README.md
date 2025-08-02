@@ -617,12 +617,254 @@ Se, agora, for preciso inserir um novo elemento, o "c" será removido, pois foi 
 
 ### Ideia da Lista Ligada
 
-Cada elemento da lista é um objeto que possui referências para seu anterior (prev) e para seu posterior (next).
+Cada elemento da lista é um objeto (Node) que possui um valor e referências para seu anterior (prev) e para seu posterior (next).
+
+Quando há referências prev e next, a lista é **duplamente encadeada**. 
 
 Há uma referência para o início da lista (head) e uma para o final (tail). A partir desses objetos, conseguimos
 acessar toda a lista, indo para os objetos anteriores ou posterirores.
 
 Além disso, é importante ter uma variável para guardar o tamanho da lista (size).
+
+---
+
+***Atributos de um nó***
+
+```bash
+    int value; //Poderia ser qualquer objeto
+    Node prev;
+    Node next;    
+```
+
+---
+
+***Construtor de um nó***
+
+* Quando um nó é criado, seu prev e next são nulos
+
+```bash
+public Node(int valor){
+    this.value = valor;
+    this.prev = null;
+    this.next = null;
+}
+
+```
+
+---
+
+***Atributos da LinkedList***
+
+```bash
+Node head;
+Node tail;
+int size;
+
+```
+
+---
+
+***Construtor da LinkedList***
+
+```bash
+public LinkedList(){
+    this.head = null; //Começa vazia
+    this.tail = null;
+    this.size = 0;
+}
+```
+
+---
+
+***Conferir se a lista está vazia***
+
+* Conferir se o head é null, se o size é zero. Dá no mesmo.
+
+```bash
+public boolean isEmpty(){
+    return this.head == null;
+}
+```
+
+---
+
+### Métodos de inserção
+
+---
+
+***addLast***
+
+* Recebe o objeto a ser adicionado, cria um nó e o adiciona no final da lista
+* Se a lista estiver vazia, head e tail vão apontar para esse novo nó
+* Sempre será preciso atualizar a referência 'tail'
+
+```bash
+public void addLast(int value){
+    Node newNode = new Node(value);
+    if(isEmpty){
+        this.head = newNode;
+        this.tail = newNode;
+    }else{
+        this.tail.next = newNode;
+        newNode.prev = this.tail;
+        this.tail = newNode;
+    }
+    this.size += 1;
+}
+```
+
+---
+
+***addFirst***
+
+* Recebe o objeto a ser adicionado, cria um nó e o adiciona no final da lista
+* Se a lista estiver vazia, head e tail vão apontar para esse novo nó
+* Sempre será preciso atualizar a referência 'head'
+
+```bash
+public void addFirst(int value){
+    Node newNode = new Node(value);
+    if(isEmpty()){
+        this.head = newNode;
+        this.tail = newNode;
+    }else{
+        this.head.prev = newNode;
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+    this.size += 1;
+}
+
+```
+
+---
+
+***Adicionar em um index***
+
+* Se a lista estiver vazia e for passado o índice 0, não deve ser possível adicionar o elemento
+(pode-se pensar que é para adicionar no começo nessa situação, mas não)
+
+* Se for passado um índice maior que a última posição, não deve ser possível adicionar o elemento
+(pode-se pensar que é para adicionar no fim nessa situação, mas não)
+
+
+```bash
+public void add(int index, int valor){
+        if(index < 0 || index >= this.size) throw new IndexOutOfBoundsException();
+        Node aux = this.head;
+        int cont = 0;
+        while(cont != index){
+                aux = aux.next;
+                cont++;
+        }
+        Node newNode = new Node(valor);
+        if(this.head == aux && index == 0) this.head = newNode;
+        if(aux.prev != null) aux.prev.next = newNode;
+        newNode.prev = aux.prev;
+        newNode.next = aux;
+        aux.prev = newNode;
+        this.size++;
+    }
+
+```
+
+---
+
+***Custo das inserções***
+
+addFirst e addLast têm custo O(1), pois envolvem apenas operações primitivas, como a manipulação de referências.
+Já a operação de adicionar um elemento numa posição arbritária da lista tem custo O(n), pois é preciso iterar sobre ela.
+
+## Métodos de busca
+
+Podemos buscar o primeiro e o último elemento da lista. Como temos as referências 'head' e 'tail', o acesso é direto 
+e não é preciso iterar.
+
+Esses métodos não retornam o nó, mas sim seu valor
+
+---
+
+***getFirst***
+
+```bash
+public int getFirst(){
+    if(isEmpty()) throw new NoSuchElementException(); //Se fosse uma lista de Usuario, por exemplo, retornaria null
+    return this.head.value;
+}
+```
+
+---
+
+***getLast***
+
+```bash
+public int getLast(){
+    if(isEmpty()) throw new NoSuchElementException();
+    return this.tail.value;
+}
+```
+
+* OBS: uma coisa que percebi é que esses dois métodos são muito bons de usar nos testes dos demais métodos, porque 
+sempre que se esquece de atualizar o valor de head ou de tail, fica fácil de saber que esse foi o erro, pois os
+asserts que envolvem getFirst() e getLast() dão errado.
+
+
+---
+
+****get***
+
+* Retorna o valor do elemento de um determinado índice
+
+```bash
+public int get(int index){
+    if(index < 0 || index > this.size - 1) throw new IndexOutOfBoundsException();
+    int cont = 0;
+    Node aux = this.head;
+    while(cont != index){
+        aux = aux.next;
+        cont++;
+    }
+    return aux.value;
+}
+```
+
+---
+
+***indexOf***
+
+* Retorna o índice da primeira ocorrência do elemento passado como parâmetro
+* Se não achar (elemento não está na lista) retorna -1;
+
+```bash
+public int indexOf(int valor){
+    Node aux = this.head;
+    int cont = 0;
+    while(aux != null){
+        if(aux.value == valor) return cont;
+        cont++
+        aux = aux.next;
+    }
+    return -1;
+}
+```
+
+---
+
+***contains***
+
+* Retona true se o elemento estiver na lista, false caso não
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
