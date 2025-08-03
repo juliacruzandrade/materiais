@@ -811,7 +811,7 @@ asserts que envolvem getFirst() e getLast() dão errado.
 
 ---
 
-****get***
+***get***
 
 * Retorna o valor do elemento de um determinado índice
 
@@ -833,7 +833,7 @@ public int get(int index){
 ***indexOf***
 
 * Retorna o índice da primeira ocorrência do elemento passado como parâmetro
-* Se não achar (elemento não está na lista) retorna -1;
+* Se não achar (elemento não está na lista) retorna -1
 
 ```bash
 public int indexOf(int valor){
@@ -850,27 +850,162 @@ public int indexOf(int valor){
 
 ---
 
+***lastIndexOf***
+
+* Retorna o índice da última ocorrência do elemento passado como parâmetro
+* Se não achar (elemento não está na lista) retorna -1
+
+```bash
+public int lastIndexOf(int valor){
+    Node aux = this.head;
+    int cont = 0;
+    int saida = -1;
+    while(aux != null){
+        if(aux.value == valor) saida = cont;
+        cont++;
+        aux = aux.next;
+    }
+    return saida;
+}
+```
+
+---
+
 ***contains***
 
 * Retona true se o elemento estiver na lista, false caso não
 
+```bash
+public boolean contains(int value){
+    return indexOf(value) != -1
+}
+```
 
+---
 
+***Custo dos métodos de busca***
 
+getFirst e getLast têm custo O(1).
+os métodos get, indexOf, lastIndexOf e contains têm custo O(n), pois envolvem iteração sobre a lista.
 
+---
 
+### Métodos de remoção
 
+1) Um método para remover o primeiro elemento
+2) Um método para remover o último elemento
+3) Um método para remover o elemento do índice passado
+4) Um método para remover o primeiro elemento com o valor igual ao que foi passado
 
+---
 
+***removeFirst***
 
+* É preciso conferir se a lista está vazia
+* É preciso conferir se a lista possui apenas um elemento
+* Retorna o elemento removido
 
+```bash
+public int removeFirst(){
+    if(isEmpty()) throw new NoSuchElementException();
+    
+    int retorno = this.head.value;
+    if(this.size == 1){
+        this.head = null;
+        this.tail = null;
+    }else{
+        this.head = this.head.next;
+        this.head.prev = null;
+    }
+    this.size--;
+    return retorno;
+}
+```
 
+---
 
+***removeLast***
 
+* É preciso conferir se a lista está vazia
+* É preciso conferir se a lista possui apenas um elemento
+* Retona o elemento removido
 
+```bash
+public int removeLast(){
+    if(isEmpty()) throw new NoSuchElementException();
+    
+    int retorno = this.tail.value;
+    if(this.size == 1){
+        this.head = null;
+        this.tail = null;    
+    }else{
+        this.tail = this.tail.prev;
+        this.tail.next = null;
+    }    
+    this.size--;
+    return retorno;
+}
+```
 
+---
 
+***remove(int index)***
 
+* Remove o elemento do índice passado como parâmetro
+* É preciso conferir se o índice é válido
+* É preciso conferir se a lista só possui um elemento
+* Se o índice passado for o primeiro ou o último, é preciso atualizar as referências de head e tail
+* Retorna o elemento removido
 
+```bash
+public int remove(int index){
+    if(index < 0 || index >= this.size) throw new IndexOutOfBoundsException();
+    
+    int retorno = this.get(index);
+    
+    Node aux = this.head;    
+
+    if(index == 0) this.head = this.head.next;
+    if(index == this.size - 1) this.tail = this.tail.prev;
+    
+    int cont = 0;
+    while(cont != index){
+        aux = aux.next;
+        cont++;
+    } 
+
+    if(aux.prev != null) aux.prev.next = aux.next;
+    if(aux.next != null) aux.next.prev = aux.prev;
+
+    this.size--;
+    return retorno;
+}
+```
+
+---
+
+***remove(int value)***
+
+* Remove a primeira ocorrência do elemento passado como parâmetro
+* Se o elemento estiver na lista (é possível removê-lo) retorna true
+* Se o elemento não estiver na lista, retorna false
+* Se o elemento for o primeiro ou o último, é preciso atualizar as referências de head e tail
+
+```bash
+public boolean remove(int value){
+    if(!this.contains(value)) return false;
+
+    int index = this.indexOf(value);
+    remove(index);
+    return true;
+}
+```
+
+---
+
+***Custo dos métodos de remoção***
+
+removeFirst e removeLast têm custo O(1). Já os outros dois métodos, o remove pelo índice e o remove pelo valor,
+têm custo O(n), pois envolvem iteração sobre a lista.
 
 
